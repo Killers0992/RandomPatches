@@ -5,7 +5,7 @@
 
 WorkStation:
 | Type | Default Value | Is global/role |
-|-|-|
+| --- | --- |
 |canActivateWorkstation|true|yes|
 |canDeactivateWorkstation|true|yes|
 
