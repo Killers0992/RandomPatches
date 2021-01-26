@@ -60,49 +60,59 @@ Tesla:
 | triggerRange | 5.5f | no |
 
 Grenade:
-- canThrowGrenade ( GLOBAL/ROLE )
-- canThrowFlashGrenade ( GLOBAL/ROLE )
-- canGrenadeExplode
-- canFlashGrenadeExplode
-- canGrenadeDealDamage ( GLOBAL/ROLE )
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canThrowGrenade   | true | yes |
+| canThrowFlashGrenade | true | yes |
+| canGrenadeExplode | true | no |
+| canFlashGrenadeExplode | true | no |
+| canGrenadeDealDamage | true | yes |
 
 Elevator:
-- canCallElevator ( GLOBAL/ROLE )
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canCallElevator   | true | yes |
 
 Ragdoll:
-- canCreateRagdoll ( GLOBAL/ROLE )
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canCreateRagdoll   | true | yes |
 
 Decontamination:
-- canAnnounce
-- canStartDecontaminationProcedure
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canAnnounce   | true | no |
+| canStartDecontaminationProcedure   | true | no |
 
 Window:
-- canBeDamaged
-- damageMultiplier
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canBeDamaged   | true | no |
+| damageMultiplier   | 0 | no |
 
 SCP:
-- announceTermination ( GLOBAL/ROLE )
-- canScp049StartRecalling
-#
-- canScp079ChangeCamera
-- canScp079useElevatorTeleport
-- canScp079useTesla
-- canScp079useDoor
-- canScp079useSpeaker
-- canScp079gainLevel
-- canScp079gainExperience
-- scp079experienceMultiplier
-#
-- canScp096calmDown
-- canScp096startEnrage
-- canScp096pryGate
-#
-- canScp106createPortal
-- canScp106usePortal
-- canScp106getContained
-#
-- canScp173blink
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| announceTermination   | true | yes |
+| canScp049StartRecalling   | true | no |
+| canScp079ChangeCamera   | true | no |
+| canScp079useElevatorTeleport   | true | no |
+| canScp079useTesla   | true | no |
+| canScp079useDoor   | true | no |
+| canScp079useSpeaker   | true | no |
+| canScp079gainLevel   | true | no |
+| canScp079gainExperience   | true | no |
+| scp079experienceMultiplier   | 0 | no |
+| canScp096calmDown   | true | no |
+| canScp096startEnrage   | true | no |
+| canScp096pryGate   | true | no |
+| canScp106createPortal   | true | no |
+| canScp106usePortal   | true | no |
+| canScp106getContained   | true | no |
+| canScp173blink   | true | no |
 
 SCP914:
-- canBeActivated ( GLOBAL/ROLE )
-- canChangeKnob ( GLOBAL/ROLE )
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canBeActivated   | true | yes |
+| canChangeKnob   | true | yes |
