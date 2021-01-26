@@ -75,6 +75,16 @@ namespace RandomPatches
             Exiled.Events.Handlers.Warhead.Stopping += eventHandlers.OnWarheadStop;
             harmony = new Harmony($"randompatches.{DateTime.Now.Ticks}");
             harmony.PatchAll();
+            Exiled.Events.Handlers.Server.WaitingForPlayers += Server_WaitingForPlayers;
         }
+
+        private void Server_WaitingForPlayers()
+        {
+            foreach(var tesla in Map.TeslaGates)
+            {
+                tesla.sizeOfTrigger = Config.Events.Tesla.triggerRange;
+            }
+        }
+
     }
 }

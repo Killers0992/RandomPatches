@@ -437,6 +437,7 @@ namespace RandomPatches
             { RoleType.Scp93989, true },
             { RoleType.Tutorial, true }
         };
+        public float triggerRange { get; set; } = 5.5f;
     }
 
     public class EventGrenade
