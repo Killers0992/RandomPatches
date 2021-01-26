@@ -18,6 +18,7 @@ Generator:
 - canInsertTablet ( GLOBAL/ROLE )
 - canRemoveTablet ( GLOBAL/ROLE )
 - canUnlockGenerator ( GLOBAL/ROLE )
+- remainingPowerup
 
 Item:
 - canDropAnyItem ( GLOBAL/ROLE )
