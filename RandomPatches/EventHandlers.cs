@@ -204,6 +204,7 @@ namespace RandomPatches
         {
             if (!MainClass.singleton.Config.Events.Scp.canScp079gainExperience)
                 ev.IsAllowed = false;
+            ev.Amount = ev.Amount * MainClass.singleton.Config.Events.Scp.scp079experienceMultiplier;
         }
 
         internal void OnScp079InteractDoor(InteractingDoorEventArgs ev)
