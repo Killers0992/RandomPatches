@@ -65,7 +65,7 @@ Window:
 SCP:
 - announceTermination ( GLOBAL/ROLE )
 - canScp049StartRecalling
-
+#
 - canScp079ChangeCamera
 - canScp079useElevatorTeleport
 - canScp079useTesla
@@ -74,15 +74,15 @@ SCP:
 - canScp079gainLevel
 - canScp079gainExperience
 - scp079experienceMultiplier
-
+#
 - canScp096calmDown
 - canScp096startEnrage
 - canScp096pryGate
-
+#
 - canScp106createPortal
 - canScp106usePortal
 - canScp106getContained
-
+#
 - canScp173blink
 
 SCP914:
