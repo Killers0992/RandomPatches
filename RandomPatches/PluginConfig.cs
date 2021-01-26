@@ -221,6 +221,7 @@ namespace RandomPatches
             { RoleType.Scientist, true },
             { RoleType.Tutorial, true }
         };
+        public float remainingPowerup { get; set; } = 70f;
     }
 
     public class EventItem

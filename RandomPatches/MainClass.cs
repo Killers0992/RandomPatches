@@ -84,6 +84,10 @@ namespace RandomPatches
             {
                 tesla.sizeOfTrigger = Config.Events.Tesla.triggerRange;
             }
+            foreach(var gen in UnityEngine.Object.FindObjectsOfType<Generator079>())
+            {
+                gen.NetworkremainingPowerup = Config.Events.Generator.remainingPowerup;
+            }
         }
 
     }
