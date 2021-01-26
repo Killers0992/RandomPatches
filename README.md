@@ -5,45 +5,59 @@
 
 WorkStation:
 | Type | Default Value | Is global/role |
-| --- | --- |
-|canActivateWorkstation|true|yes|
-|canDeactivateWorkstation|true|yes|
+| --- | :---: | :---: |
+| canActivateWorkstation   | true | yes |
+| canDeactivateWorkstation | true | yes |
 
 Warhead:
-- canChangeLeverStatus ( GLOBAL/ROLE )
-- canBeEnabled ( GLOBAL/ROLE )
-- canBeDisabled ( GLOBAL/ROLE )
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canChangeLeverStatus   | true | yes |
+| canBeEnabled | true | yes |
+| canBeDisabled | true | yes |
 
 Generator:
-- canCloseGenerator ( GLOBAL/ROLE )
-- canOpenGenerator ( GLOBAL/ROLE )
-- canInsertTablet ( GLOBAL/ROLE )
-- canRemoveTablet ( GLOBAL/ROLE )
-- canUnlockGenerator ( GLOBAL/ROLE )
-- remainingPowerup
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canCloseGenerator   | true | yes |
+| canOpenGenerator | true | yes |
+| canInsertTablet | true | yes |
+| canRemoveTablet | true | yes |
+| canUnlockGenerator | true | yes |
+| remainingPowerup | 70f | no |
 
 Item:
-- canDropAnyItem ( GLOBAL/ROLE )
-- canPickupAnyItem ( GLOBAL/ROLE )
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canDropAnyItem   | true | yes |
+| canPickupAnyItem | true | yes |
 
 MedicalItem:
-- canUseMedicalItem ( GLOBAL/ROLE )
-- canCancelUsingMedicalItem ( GLOBAL/ROLE )
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canUseMedicalItem   | true | yes |
+| canCancelUsingMedicalItem | true | yes |
 
 PocketDimension:
-- canEnterPocketDimension ( GLOBAL/ROLE )
-- canExitPocketDimension ( GLOBAL/ROLE )
-- alwaysExitPocketDimension ( GLOBAL/ROLE )
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canEnterPocketDimension   | true | yes |
+| canExitPocketDimension | true | yes |
+| alwaysExitPocketDimension | false | yes |
 
 Weapon:
-- canReloadWeapon ( GLOBAL/ROLE )
-- canShotWeapon ( GLOBAL/ROLE )
-- canChangeAttachments
-- canChangeDurability
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canReloadWeapon   | true | yes |
+| canShotWeapon | true | yes |
+| canChangeAttachments | true | no |
+| canChangeDurability | true | no |
 
 Tesla:
-- canActivateTesla ( GLOBAL/ROLE )
-- triggerRange
+| Type | Default Value | Is global/role |
+| --- | :---: | :---: |
+| canActivateTesla   | true | yes |
+| triggerRange | 5.5f | no |
 
 Grenade:
 - canThrowGrenade ( GLOBAL/ROLE )
