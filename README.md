@@ -4,8 +4,10 @@
 # Global/Role means that option can be for everyone or role based.
 
 WorkStation:
-- canActivateWorkstation ( GLOBAL/ROLE )
-- canDeactivateWorkstation ( GLOBAL/ROLE )
+| Type | Default Value | Is global/role |
+|-|-|
+|canActivateWorkstation|true|yes|
+|canDeactivateWorkstation|true|yes|
 
 Warhead:
 - canChangeLeverStatus ( GLOBAL/ROLE )
