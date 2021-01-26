@@ -1,6 +1,7 @@
 # RandomPatches
 
-Config:
+
+# Global/Role means that option can be for everyone or role based.
 
 WorkStation:
 - canActivateWorkstation ( GLOBAL/ROLE )
