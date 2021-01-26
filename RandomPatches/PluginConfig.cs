@@ -586,7 +586,47 @@ namespace RandomPatches
 
     public class EventScp914
     {
-        public bool canBeActivated { get; set; } = true;
-        public bool canChangeKnob { get; set; } = true;
+        public bool canBeActivatedGlobal { get; set; } = true;
+        public Dictionary<RoleType, bool> canBeActivated { get; set; } = new Dictionary<RoleType, bool>()
+        {
+            { RoleType.ChaosInsurgency, true },
+            { RoleType.ClassD, true },
+            { RoleType.FacilityGuard, true },
+            { RoleType.NtfCadet, true },
+            { RoleType.NtfCommander, true },
+            { RoleType.NtfLieutenant, true },
+            { RoleType.NtfScientist, true },
+            { RoleType.Scientist, true },
+            { RoleType.Scp049, true },
+            { RoleType.Scp0492, true },
+            { RoleType.Scp079, true },
+            { RoleType.Scp096, true },
+            { RoleType.Scp106, true },
+            { RoleType.Scp173, true },
+            { RoleType.Scp93953, true },
+            { RoleType.Scp93989, true },
+            { RoleType.Tutorial, true }
+        };
+        public bool canChangeKnobGlobal { get; set; } = true;
+        public Dictionary<RoleType, bool> canChangeKnob { get; set; } = new Dictionary<RoleType, bool>()
+        {
+            { RoleType.ChaosInsurgency, true },
+            { RoleType.ClassD, true },
+            { RoleType.FacilityGuard, true },
+            { RoleType.NtfCadet, true },
+            { RoleType.NtfCommander, true },
+            { RoleType.NtfLieutenant, true },
+            { RoleType.NtfScientist, true },
+            { RoleType.Scientist, true },
+            { RoleType.Scp049, true },
+            { RoleType.Scp0492, true },
+            { RoleType.Scp079, true },
+            { RoleType.Scp096, true },
+            { RoleType.Scp106, true },
+            { RoleType.Scp173, true },
+            { RoleType.Scp93953, true },
+            { RoleType.Scp93989, true },
+            { RoleType.Tutorial, true }
+        };
     }
 }

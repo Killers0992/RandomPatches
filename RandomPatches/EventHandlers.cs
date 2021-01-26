@@ -148,7 +148,7 @@ namespace RandomPatches
 
         internal void OnScp914ChangeKnob(ChangingKnobSettingEventArgs ev)
         {
-            if (!MainClass.singleton.Config.Events.Scp914.canChangeKnob)
+            if (!MainClass.singleton.Config.Events.Scp914.canChangeKnobGlobal || !MainClass.singleton.Config.Events.Scp914.canChangeKnob[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
@@ -172,7 +172,7 @@ namespace RandomPatches
 
         internal void OnScp914Activate(ActivatingEventArgs ev)
         {
-            if (!MainClass.singleton.Config.Events.Scp914.canBeActivated)
+            if (!MainClass.singleton.Config.Events.Scp914.canBeActivatedGlobal || !MainClass.singleton.Config.Events.Scp914.canBeActivated[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
