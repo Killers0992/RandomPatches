@@ -40,6 +40,7 @@ Weapon:
 
 Tesla:
 - canActivateTesla ( GLOBAL/ROLE )
+- triggerRange
 
 Grenade:
 - canThrowGrenade ( GLOBAL/ROLE )
