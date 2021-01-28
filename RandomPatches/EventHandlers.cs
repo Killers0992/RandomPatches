@@ -1,6 +1,7 @@
 ﻿using Exiled.Events.EventArgs;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -178,6 +179,11 @@ namespace RandomPatches
         {
             if (!MainClass.Cfg.Warhead.canBeEnabledGlobal || !MainClass.Cfg.Warhead.canBeEnabled[ev.Player.Role])
                 ev.IsAllowed = false;
+        }
+
+        internal void OnReloadConfigs()
+        {
+            MainClass.Cfg = MainClass.Deserializer.Deserialize<Events>(File.ReadAllText(MainClass.singleton.Config.FullPath));
         }
 
         internal void OnScp914Activate(ActivatingEventArgs ev)

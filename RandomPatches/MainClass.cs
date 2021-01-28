@@ -21,12 +21,12 @@ namespace RandomPatches
         public EventHandlers eventHandlers;
         public static MainClass singleton;
 
-        private static readonly ISerializer Serializer = new SerializerBuilder()
+        public static readonly ISerializer Serializer = new SerializerBuilder()
             .WithNamingConvention(UnderscoredNamingConvention.Instance)
             .IgnoreFields()
             .Build();
 
-        private static readonly IDeserializer Deserializer = new DeserializerBuilder()
+        public static readonly IDeserializer Deserializer = new DeserializerBuilder()
             .WithNamingConvention(UnderscoredNamingConvention.Instance)
             .IgnoreFields()
             .IgnoreUnmatchedProperties()
@@ -105,10 +105,12 @@ namespace RandomPatches
             Exiled.Events.Handlers.Warhead.ChangingLeverStatus += eventHandlers.OnWarheadChangeLeverStatus;
             Exiled.Events.Handlers.Warhead.Starting += eventHandlers.OnWarheadStart;
             Exiled.Events.Handlers.Warhead.Stopping += eventHandlers.OnWarheadStop;
+            Exiled.Events.Handlers.Server.ReloadedConfigs += eventHandlers.OnReloadConfigs;
             harmony = new Harmony($"randompatches.{DateTime.Now.Ticks}");
             harmony.PatchAll();
             Exiled.Events.Handlers.Server.WaitingForPlayers += Server_WaitingForPlayers;
         }
+
 
         private void Server_WaitingForPlayers()
         {
