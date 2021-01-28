@@ -2,9 +2,12 @@
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace RandomPatches
 {
@@ -18,10 +21,38 @@ namespace RandomPatches
         public EventHandlers eventHandlers;
         public static MainClass singleton;
 
+        private static readonly ISerializer Serializer = new SerializerBuilder()
+            .WithNamingConvention(UnderscoredNamingConvention.Instance)
+            .IgnoreFields()
+            .Build();
+
+        private static readonly IDeserializer Deserializer = new DeserializerBuilder()
+            .WithNamingConvention(UnderscoredNamingConvention.Instance)
+            .IgnoreFields()
+            .IgnoreUnmatchedProperties()
+            .Build();
+
+        public static Events Cfg;
         public override void OnEnabled()
         {
             if (!Config.IsEnabled)
                 return;
+            if (!Directory.Exists(Config.Folder))
+            {
+                Log.Warn($"Randompatches directory at {Config.Folder} is missing, creating.");
+                Directory.CreateDirectory(Config.Folder);
+            }
+
+            if (!File.Exists(Config.FullPath))
+            {
+                Log.Warn($"Randompatches file at {Config.FullPath} is missing, creating.");
+                File.WriteAllText(Config.FullPath, Serializer.Serialize(new Events()));
+            }
+            else
+            {
+                Cfg = Deserializer.Deserialize<Events>(File.ReadAllText(Config.FullPath));
+                File.WriteAllText(Config.FullPath, Serializer.Serialize(Cfg));
+            }
             singleton = this;
             base.OnEnabled();
             eventHandlers = new EventHandlers();
@@ -82,11 +113,11 @@ namespace RandomPatches
         {
             foreach(var tesla in Map.TeslaGates)
             {
-                tesla.sizeOfTrigger = Config.Events.Tesla.triggerRange;
+                tesla.sizeOfTrigger = Cfg.Tesla.triggerRange;
             }
             foreach(var gen in UnityEngine.Object.FindObjectsOfType<Generator079>())
             {
-                gen.NetworkremainingPowerup = Config.Events.Generator.remainingPowerup;
+                gen.NetworkremainingPowerup = Cfg.Generator.remainingPowerup;
             }
         }
 

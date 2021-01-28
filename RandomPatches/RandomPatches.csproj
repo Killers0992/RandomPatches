@@ -84,15 +84,14 @@
   <ItemGroup>
     <Compile Include="EventHandlers.cs" />
     <Compile Include="MainClass.cs" />
+    <Compile Include="Patches\Scp096DestroyDoorPatch.cs" />
     <Compile Include="PluginConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Patches\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /y ".\RandomPatches.dll" "..\..\..\Output"</PostBuildEvent>

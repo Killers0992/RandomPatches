@@ -1,6 +1,9 @@
-﻿using Exiled.API.Interfaces;
+﻿using Exiled.API.Features;
+using Exiled.API.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +12,18 @@ namespace RandomPatches
 {
     public class PluginConfig : IConfig
     {
+        public PluginConfig()
+        {
+            Folder = Paths.Configs;
+            FullPath = Path.Combine(Folder, "randompatches-" + Server.Port + ".yml");
+        }
         public bool IsEnabled { get; set; } = true;
-        public Events Events { get; set; } = new Events();
+
+        [Description("The randompatches folder path")]
+        public string Folder { get; private set; }
+
+        [Description("The randompatches full path")]
+        public string FullPath { get; private set; }
     }
 
     public class Events
@@ -412,7 +425,17 @@ namespace RandomPatches
             { RoleType.Tutorial, true }
         };
         public bool canChangeAttachments { get; set; } = true;
-        public bool canChangeDurability { get; set; } = true;
+        public bool canChangeDurabilityGlobal { get; set; } = true;
+        public Dictionary<ItemType, bool> canChangeDurability { get; set; } = new Dictionary<ItemType, bool>()
+        {
+            { ItemType.MicroHID, true },
+            { ItemType.GunCOM15, true },
+            { ItemType.GunE11SR, true },
+            { ItemType.GunLogicer, true },
+            { ItemType.GunMP7, true },
+            { ItemType.GunProject90, true },
+            { ItemType.GunUSP, true }
+        };
     }
 
     public class EventTesla
@@ -581,6 +604,7 @@ namespace RandomPatches
         public bool canScp096calmDown { get; set; } = true;
         public bool canScp096startEnrage { get; set; } = true;
         public bool canScp096pryGate { get; set; } = true;
+        public bool canScp096destroyDoor { get; set; } = true;
         public bool canScp106createPortal { get; set; } = true;
         public bool canScp106usePortal { get; set; } = true;
         public bool canScp106getContained { get; set; } = true;
