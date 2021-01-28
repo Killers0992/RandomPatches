@@ -46,7 +46,8 @@ namespace RandomPatches
             if (!File.Exists(Config.FullPath))
             {
                 Log.Warn($"Randompatches file at {Config.FullPath} is missing, creating.");
-                File.WriteAllText(Config.FullPath, Serializer.Serialize(new Events()));
+                Cfg = new Events();
+                File.WriteAllText(Config.FullPath, Serializer.Serialize(Cfg));
             }
             else
             {

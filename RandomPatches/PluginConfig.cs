@@ -15,7 +15,7 @@ namespace RandomPatches
         public PluginConfig()
         {
             Folder = Paths.Configs;
-            FullPath = Path.Combine(Folder, "randompatches-" + Server.Port + ".yml");
+            FullPath = Path.Combine(Folder, $"{Server.Port}-randompatches.yml");
         }
         public bool IsEnabled { get; set; } = true;
 
