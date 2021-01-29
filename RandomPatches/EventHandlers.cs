@@ -15,7 +15,7 @@ namespace RandomPatches
     {
         internal void OnActivateWorkstation(ActivatingWorkstationEventArgs ev)
         {
-            if (!MainClass.Cfg.Workstation.canActivateWorkstationGlobal || !MainClass.Cfg.Workstation.canActivateWorkstation[ev.Player.Role])
+            if (!MainClass.Cfg.Workstation.canActivateWorkstationGlobal && !MainClass.Cfg.Workstation.canActivateWorkstation[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
@@ -25,67 +25,67 @@ namespace RandomPatches
 
         internal void OnClosingGenerator(ClosingGeneratorEventArgs ev)
         {
-            if (!MainClass.Cfg.Generator.canCloseGeneratorGlobal || !MainClass.Cfg.Generator.canCloseGenerator[ev.Player.Role])
+            if (!MainClass.Cfg.Generator.canCloseGeneratorGlobal && !MainClass.Cfg.Generator.canCloseGenerator[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnDeactivateWorkstation(DeactivatingWorkstationEventArgs ev)
         {
-            if (!MainClass.Cfg.Workstation.canDeactivateWorkstationGlobal || !MainClass.Cfg.Workstation.canDeactivateWorkstation[ev.Player.Role])
+            if (!MainClass.Cfg.Workstation.canDeactivateWorkstationGlobal && !MainClass.Cfg.Workstation.canDeactivateWorkstation[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnDropItem(DroppingItemEventArgs ev)
         {
-            if (!MainClass.Cfg.Item.canDropAnyItemGlobal || !MainClass.Cfg.Item.canDropAnyItem[ev.Player.Role])
+            if (!MainClass.Cfg.Item.canDropAnyItemGlobal && !MainClass.Cfg.Item.canDropAnyItem[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnOpenGenerator(OpeningGeneratorEventArgs ev)
         {
-            if (!MainClass.Cfg.Generator.canOpenGeneratorGlobal || !MainClass.Cfg.Generator.canOpenGenerator[ev.Player.Role])
+            if (!MainClass.Cfg.Generator.canOpenGeneratorGlobal && !MainClass.Cfg.Generator.canOpenGenerator[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnPickupItem(PickingUpItemEventArgs ev)
         {
-            if (!MainClass.Cfg.Item.canPickupAnyItemGlobal || !MainClass.Cfg.Item.canPickupAnyItem[ev.Player.Role])
+            if (!MainClass.Cfg.Item.canPickupAnyItemGlobal && !MainClass.Cfg.Item.canPickupAnyItem[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnAddTablet(InsertingGeneratorTabletEventArgs ev)
         {
-            if (!MainClass.Cfg.Generator.canInsertTabletGlobal || !MainClass.Cfg.Generator.canInsertTablet[ev.Player.Role])
+            if (!MainClass.Cfg.Generator.canInsertTabletGlobal && !MainClass.Cfg.Generator.canInsertTablet[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnFailEscapePD(FailingEscapePocketDimensionEventArgs ev)
         {
-            if (MainClass.Cfg.PocketDimension.alwaysExitPocketDimensionGlobal || MainClass.Cfg.PocketDimension.alwaysExitPocketDimension[ev.Player.Role])
+            if (MainClass.Cfg.PocketDimension.alwaysExitPocketDimensionGlobal && MainClass.Cfg.PocketDimension.alwaysExitPocketDimension[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnShotWeapon(ShootingEventArgs ev)
         {
-            if (!MainClass.Cfg.Weapon.canShotWeaponGlobal || !MainClass.Cfg.Weapon.canShotWeapon[ev.Shooter.Role])
+            if (!MainClass.Cfg.Weapon.canShotWeaponGlobal && !MainClass.Cfg.Weapon.canShotWeapon[ev.Shooter.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnActivateTesla(TriggeringTeslaEventArgs ev)
         {
-            if (!MainClass.Cfg.Tesla.canActivateTeslaGlobal || !MainClass.Cfg.Tesla.canActivateTesla[ev.Player.Role])
+            if (!MainClass.Cfg.Tesla.canActivateTeslaGlobal && !MainClass.Cfg.Tesla.canActivateTesla[ev.Player.Role])
                 ev.IsTriggerable = false;
         }
 
         internal void OnUseMedicalItem(UsingMedicalItemEventArgs ev)
         {
-            if (!MainClass.Cfg.MedicalItem.canUseMedicalItemGlobal || !MainClass.Cfg.MedicalItem.canUseMedicalItem[ev.Player.Role])
+            if (!MainClass.Cfg.MedicalItem.canUseMedicalItemGlobal && !MainClass.Cfg.MedicalItem.canUseMedicalItem[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnSpawnRagdoll(SpawningRagdollEventArgs ev)
         {
-            if (!MainClass.Cfg.Ragdoll.canCreateRagdollGlobal || !MainClass.Cfg.Ragdoll.canCreateRagdoll[ev.RoleType])
+            if (!MainClass.Cfg.Ragdoll.canCreateRagdollGlobal && !MainClass.Cfg.Ragdoll.canCreateRagdoll[ev.RoleType])
                 ev.IsAllowed = false;
         }
 
@@ -114,7 +114,7 @@ namespace RandomPatches
 
         internal void OnAnnounceTermination(AnnouncingScpTerminationEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.announceTerminationGlobal || !MainClass.Cfg.Scp.announceTermination[ev.Role.roleId])
+            if (!MainClass.Cfg.Scp.announceTerminationGlobal && !MainClass.Cfg.Scp.announceTermination[ev.Role.roleId])
                 ev.IsAllowed = false;
         }
 
@@ -162,25 +162,25 @@ namespace RandomPatches
 
         internal void OnScp914ChangeKnob(ChangingKnobSettingEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp914.canChangeKnobGlobal || !MainClass.Cfg.Scp914.canChangeKnob[ev.Player.Role])
+            if (!MainClass.Cfg.Scp914.canChangeKnobGlobal && !MainClass.Cfg.Scp914.canChangeKnob[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnWarheadChangeLeverStatus(ChangingLeverStatusEventArgs ev)
         {
-            if (!MainClass.Cfg.Warhead.canChangeLeverStatusGlobal || !MainClass.Cfg.Warhead.canChangeLeverStatus[ev.Player.Role])
+            if (!MainClass.Cfg.Warhead.canChangeLeverStatusGlobal && !MainClass.Cfg.Warhead.canChangeLeverStatus[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnWarheadStop(StoppingEventArgs ev)
         {
-            if (!MainClass.Cfg.Warhead.canBeDisabledGlobal || !MainClass.Cfg.Warhead.canBeDisabled[ev.Player.Role])
+            if (!MainClass.Cfg.Warhead.canBeDisabledGlobal && !MainClass.Cfg.Warhead.canBeDisabled[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnWarheadStart(StartingEventArgs ev)
         {
-            if (!MainClass.Cfg.Warhead.canBeEnabledGlobal || !MainClass.Cfg.Warhead.canBeEnabled[ev.Player.Role])
+            if (!MainClass.Cfg.Warhead.canBeEnabledGlobal && !MainClass.Cfg.Warhead.canBeEnabled[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
@@ -326,7 +326,7 @@ namespace RandomPatches
 
         internal void OnScp914Activate(ActivatingEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp914.canBeActivatedGlobal || !MainClass.Cfg.Scp914.canBeActivated[ev.Player.Role])
+            if (!MainClass.Cfg.Scp914.canBeActivatedGlobal && !MainClass.Cfg.Scp914.canBeActivated[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
@@ -423,7 +423,7 @@ namespace RandomPatches
 
         internal void OnInteractElevator(InteractingElevatorEventArgs ev)
         {
-            if (!MainClass.Cfg.Elevator.canCallElevatorGlobal || !MainClass.Cfg.Elevator.canCallElevator[ev.Player.Role])
+            if (!MainClass.Cfg.Elevator.canCallElevatorGlobal && !MainClass.Cfg.Elevator.canCallElevator[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
@@ -432,11 +432,11 @@ namespace RandomPatches
             switch (ev.Type)
             {
                 case Exiled.API.Enums.GrenadeType.FragGrenade:
-                    if (!MainClass.Cfg.Grenade.canThrowGrenadeGlobal || !MainClass.Cfg.Grenade.canThrowGrenade[ev.Player.Role])
+                    if (!MainClass.Cfg.Grenade.canThrowGrenadeGlobal && !MainClass.Cfg.Grenade.canThrowGrenade[ev.Player.Role])
                         ev.IsAllowed = false;
                     break;
                 case Exiled.API.Enums.GrenadeType.Flashbang:
-                    if (!MainClass.Cfg.Grenade.canThrowFlashGrenadeGlobal || !MainClass.Cfg.Grenade.canThrowFlashGrenade[ev.Player.Role])
+                    if (!MainClass.Cfg.Grenade.canThrowFlashGrenadeGlobal && !MainClass.Cfg.Grenade.canThrowFlashGrenade[ev.Player.Role])
                         ev.IsAllowed = false;
                     break;
             }
@@ -444,37 +444,37 @@ namespace RandomPatches
 
         internal void OnCancelMedicalItem(StoppingMedicalItemEventArgs ev)
         {
-            if (!MainClass.Cfg.MedicalItem.canCancelUsingMedicalItemGlobal || !MainClass.Cfg.MedicalItem.canUseMedicalItem[ev.Player.Role])
+            if (!MainClass.Cfg.MedicalItem.canCancelUsingMedicalItemGlobal && !MainClass.Cfg.MedicalItem.canUseMedicalItem[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnUnlockGenerator(UnlockingGeneratorEventArgs ev)
         {
-            if (!MainClass.Cfg.Generator.canUnlockGeneratorGlobal || !MainClass.Cfg.Generator.canUnlockGenerator[ev.Player.Role])
+            if (!MainClass.Cfg.Generator.canUnlockGeneratorGlobal && !MainClass.Cfg.Generator.canUnlockGenerator[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnReloadWeapon(ReloadingWeaponEventArgs ev)
         {
-            if (!MainClass.Cfg.Weapon.canReloadWeaponGlobal || !MainClass.Cfg.Weapon.canReloadWeapon[ev.Player.Role])
+            if (!MainClass.Cfg.Weapon.canReloadWeaponGlobal && !MainClass.Cfg.Weapon.canReloadWeapon[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnExitPD(EscapingPocketDimensionEventArgs ev)
         {
-            if (!MainClass.Cfg.PocketDimension.canExitPocketDimensionGlobal || !MainClass.Cfg.PocketDimension.canExitPocketDimension[ev.Player.Role])
+            if (!MainClass.Cfg.PocketDimension.canExitPocketDimensionGlobal && !MainClass.Cfg.PocketDimension.canExitPocketDimension[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnEnterPD(EnteringPocketDimensionEventArgs ev)
         {
-            if (!MainClass.Cfg.PocketDimension.canEnterPocketDimensionGlobal || !MainClass.Cfg.PocketDimension.canEnterPocketDimension[ev.Player.Role])
+            if (!MainClass.Cfg.PocketDimension.canEnterPocketDimensionGlobal && !MainClass.Cfg.PocketDimension.canEnterPocketDimension[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnRemoveTablet(EjectingGeneratorTabletEventArgs ev)
         {
-            if (!MainClass.Cfg.Generator.canRemoveTabletGlobal || !MainClass.Cfg.Generator.canRemoveTablet[ev.Player.Role])
+            if (!MainClass.Cfg.Generator.canRemoveTabletGlobal && !MainClass.Cfg.Generator.canRemoveTablet[ev.Player.Role])
                 ev.IsAllowed = false;
         }
     }
