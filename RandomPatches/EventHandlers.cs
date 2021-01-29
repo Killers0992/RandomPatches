@@ -236,6 +236,7 @@ namespace RandomPatches
                         if (door is BreakableDoor dr)
                         {
                             dr._maxHealth = checkpoint.health;
+                            dr._remainingHealth = checkpoint.health;
                             dr._ignoredDamageSources = checkpoint.ignoreDamageType;
                         }
                     }
@@ -265,8 +266,10 @@ namespace RandomPatches
                                 }
                             });
                         }
-                        bd._maxHealth = MainClass.Cfg.Door.Doors[name.GetName].health;
-                        bd._ignoredDamageSources = MainClass.Cfg.Door.Doors[name.GetName].ignoreDamageType;
+                        var door = MainClass.Cfg.Door.Doors[name.GetName];
+                        bd._maxHealth = door.health;
+                        bd._remainingHealth = door.health;
+                        bd._ignoredDamageSources = door.ignoreDamageType;
                     }
                 }
             }
