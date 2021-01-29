@@ -116,3 +116,38 @@ SCP914:
 | --- | :---: | :---: |
 | canBeActivated   | true | yes |
 | canChangeKnob   | true | yes |
+
+Checkpoint & Doors:
+
+Seperate keycard permissions by comma example:
+``
+keycard_permission: AlphaWarhead, ContainmentLevelThree
+``
+
+Seperate ignore damage type by comma example:
+``
+ignore_damage_type: Grenade, Weapon
+``
+
+| Keycard Permission Name |
+| --- |
+| None |
+| Checkpoints |
+| ExitGates |
+| Intercom |
+| AlphaWarhead |
+| ContainmentLevelOne |
+| ContainmentLevelTwo |
+| ContainmentLevelThree |
+| ArmoryLevelOne |
+| ArmoryLevelTwo |
+| ArmoryLevelThree |
+| ScpOverride |
+
+| Damage Type Name |
+| --- |
+| None |
+| ServerCommand |
+| Grenade |
+| Weapon |
+| Scp096 |
