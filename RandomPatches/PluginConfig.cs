@@ -62,6 +62,7 @@ namespace RandomPatches
 
     public class Door
     {
+        public float health { get; set; }
         public DoorPerm doorPermission { get; set; }
         public DoorDamageType ignoreDamageType { get; set; }
     }
@@ -73,6 +74,7 @@ namespace RandomPatches
 
     public class Checkpoint
     {
+        public float health { get; set; }
         public DoorPerm doorPermission { get; set; }
         public DoorDamageType ignoreDamageType { get; set; }
     }

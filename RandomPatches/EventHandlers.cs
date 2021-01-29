@@ -216,6 +216,7 @@ namespace RandomPatches
                         MainClass.Cfg.Checkpoint.Checkpoints.Add(name.GetName, new Checkpoint()
                         {
                             ignoreDamageType = (cp._subDoors[0] as BreakableDoor)._ignoredDamageSources,
+                            health = (cp._subDoors[0] as BreakableDoor)._maxHealth,
                             doorPermission = new DoorPerm()
                             {
                                 requireAll = doorPerm.RequireAll,
@@ -234,6 +235,7 @@ namespace RandomPatches
                     {
                         if (door is BreakableDoor dr)
                         {
+                            dr._maxHealth = checkpoint.health;
                             dr._ignoredDamageSources = checkpoint.ignoreDamageType;
                         }
                     }
@@ -255,6 +257,7 @@ namespace RandomPatches
                             MainClass.Cfg.Door.Doors.Add(name.GetName, new Door()
                             {
                                 ignoreDamageType = bd._ignoredDamageSources,
+                                health = bd._maxHealth,
                                 doorPermission = new DoorPerm()
                                 {
                                     requireAll = doorPerm.RequireAll,
@@ -262,6 +265,7 @@ namespace RandomPatches
                                 }
                             });
                         }
+                        bd._maxHealth = MainClass.Cfg.Door.Doors[name.GetName].health;
                         bd._ignoredDamageSources = MainClass.Cfg.Door.Doors[name.GetName].ignoreDamageType;
                     }
                 }
