@@ -1,4 +1,5 @@
-# RandomPatches
+# RandomPatches -
+That plugin allows to change doors keycard permissions or who can throw grenades and more !!!
 
 
 # Global/Role means that option can be for everyone or role based.
