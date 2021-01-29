@@ -276,7 +276,8 @@ namespace RandomPatches
                 {
                     if (d is BreakableDoor bd)
                     {
-                        var nm = $"All_{(d.name.StartsWith("EZ") ? d.name.Remove(3) : d.name.Take(2))}";
+                        var nm = $"All_{(d.name.StartsWith("EZ") ? d.name.Take(2) : d.name.Take(3))}";
+                        doors.Add(nm);
                         if (!MainClass.Cfg.Door.Doors.ContainsKey(nm))
                         {
                             Log.Info($"Add missing door {nm}.");
