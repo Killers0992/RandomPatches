@@ -272,6 +272,36 @@ namespace RandomPatches
                         bd._ignoredDamageSources = door.ignoreDamageType;
                     }
                 }
+                else
+                {
+                    if (d is BreakableDoor bd)
+                    {
+                        var nm = $"All_{(d.name.StartsWith("EZ") ? d.name.Remove(3) : d.name.Take(2))}";
+                        if (!MainClass.Cfg.Door.Doors.ContainsKey(nm))
+                        {
+                            var doorPerm = bd.RequiredPermissions;
+                            MainClass.Cfg.Door.Doors.Add(nm, new Door()
+                            {
+                                ignoreDamageType = bd._ignoredDamageSources,
+                                health = bd._maxHealth,
+                                doorPermission = new DoorPerm()
+                                {
+                                    requireAll = doorPerm.RequireAll,
+                                    keycardPermission = doorPerm.RequiredPermissions
+                                }
+                            });
+                        }
+                        var bdoor = MainClass.Cfg.Door.Doors[nm];
+                        bd._ignoredDamageSources = bdoor.ignoreDamageType;
+                        bd.RequiredPermissions = new DoorPermissions()
+                        {
+                            RequireAll = bdoor.doorPermission.requireAll,
+                            RequiredPermissions = bdoor.doorPermission.keycardPermission
+                        };
+                        bd._maxHealth = bdoor.health;
+                        bd._remainingHealth = bdoor.health;
+                    }
+                }
             }
             foreach(var door in MainClass.Cfg.Door.Doors.Keys.ToArray())
             {
