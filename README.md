@@ -4,6 +4,8 @@ That plugin allows to change doors keycard permissions or who can throw grenades
 
 # Global/Role means that option can be for everyone or role based.
 
+If you want to have something role based then set global value to false and for roles set true/false
+
 WorkStation:
 | Type | Default Value | Is global/role |
 | --- | :---: | :---: |
