@@ -1,4 +1,7 @@
-﻿using Exiled.Events.EventArgs;
+﻿using Exiled.API.Features;
+using Exiled.Events.EventArgs;
+using Interactables.Interobjects;
+using Interactables.Interobjects.DoorUtils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -184,6 +187,102 @@ namespace RandomPatches
         internal void OnReloadConfigs()
         {
             MainClass.Cfg = MainClass.Deserializer.Deserialize<Events>(File.ReadAllText(MainClass.singleton.Config.FullPath));
+            OnWaitingForPlayers();
+        }
+
+        internal void OnWaitingForPlayers()
+        {
+            foreach (var tesla in Map.TeslaGates)
+            {
+                tesla.sizeOfTrigger = MainClass.Cfg.Tesla.triggerRange;
+            }
+            foreach (var gen in UnityEngine.Object.FindObjectsOfType<Generator079>())
+            {
+                gen.NetworkremainingPowerup = MainClass.Cfg.Generator.remainingPowerup;
+            }
+            List<string> doors = new List<string>();
+            List<string> checkpoints = new List<string>();
+
+            foreach (var cp in UnityEngine.Object.FindObjectsOfType<CheckpointDoor>())
+            {
+                if (cp.TryGetComponent<DoorNametagExtension>(out DoorNametagExtension name))
+                {
+                    if (!name.GetName.Contains("CHECKPOINT"))
+                        continue;
+                    if (!MainClass.Cfg.Checkpoint.Checkpoints.ContainsKey(name.GetName))
+                    {
+                        Log.Info($"Add missing checkpoint {name.GetName}.");
+                        var doorPerm = cp.RequiredPermissions;
+                        MainClass.Cfg.Checkpoint.Checkpoints.Add(name.GetName, new Checkpoint()
+                        {
+                            ignoreDamageType = (cp._subDoors[0] as BreakableDoor)._ignoredDamageSources,
+                            doorPermission = new DoorPerm()
+                            {
+                                requireAll = doorPerm.RequireAll,
+                                keycardPermission = doorPerm.RequiredPermissions
+                            }
+                        });
+                    }
+                    var checkpoint = MainClass.Cfg.Checkpoint.Checkpoints[name.GetName];
+                    checkpoints.Add(name.GetName);
+                    cp.RequiredPermissions = new DoorPermissions()
+                    {
+                        RequireAll = checkpoint.doorPermission.requireAll,
+                        RequiredPermissions = checkpoint.doorPermission.keycardPermission
+                    };
+                    foreach (var door in cp._subDoors)
+                    {
+                        if (door is BreakableDoor dr)
+                        {
+                            dr._ignoredDamageSources = checkpoint.ignoreDamageType;
+                        }
+                    }
+                }
+            }
+            foreach(var d in UnityEngine.Object.FindObjectsOfType<DoorVariant>())
+            {
+                if (d.TryGetComponent<DoorNametagExtension>(out DoorNametagExtension name))
+                {
+                    if (checkpoints.Contains(name.GetName))
+                        continue;
+                    if (d is BreakableDoor bd)
+                    {
+                        doors.Add(name.GetName);
+                        if (!MainClass.Cfg.Door.Doors.ContainsKey(name.GetName))
+                        {
+                            Log.Info($"Add missing door {name.GetName}.");
+                            var doorPerm = bd.RequiredPermissions;
+                            MainClass.Cfg.Door.Doors.Add(name.GetName, new Door()
+                            {
+                                ignoreDamageType = bd._ignoredDamageSources,
+                                doorPermission = new DoorPerm()
+                                {
+                                    requireAll = doorPerm.RequireAll,
+                                    keycardPermission = doorPerm.RequiredPermissions
+                                }
+                            });
+                        }
+                        bd._ignoredDamageSources = MainClass.Cfg.Door.Doors[name.GetName].ignoreDamageType;
+                    }
+                }
+            }
+            foreach(var door in MainClass.Cfg.Door.Doors.Keys.ToArray())
+            {
+                if (!doors.Contains(door))
+                {
+                    MainClass.Cfg.Door.Doors.Remove(door);
+                    Log.Info($"Removed door {door}, reason: not found.");
+                }
+            }
+            foreach (var checkpoint in MainClass.Cfg.Checkpoint.Checkpoints.Keys.ToArray())
+            {
+                if (!checkpoints.Contains(checkpoint))
+                {
+                    MainClass.Cfg.Checkpoint.Checkpoints.Remove(checkpoint);
+                    Log.Info($"Removed checkpoint {checkpoint}, reason: not found.");
+                }
+            }
+            MainClass.singleton.SaveConfig();
         }
 
         internal void OnScp914Activate(ActivatingEventArgs ev)

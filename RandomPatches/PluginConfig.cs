@@ -1,5 +1,6 @@
 ﻿using Exiled.API.Features;
 using Exiled.API.Interfaces;
+using Interactables.Interobjects.DoorUtils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,9 +42,39 @@ namespace RandomPatches
         public EventRagdoll Ragdoll { get; set; } = new EventRagdoll();
         public EventDecontamination Decontamination { get; set; } = new EventDecontamination();
         public EventWindow Window { get; set; } = new EventWindow();
-        public EventScp Scp { get; set; } = new EventScp(); 
+        public EventScp Scp { get; set; } = new EventScp();
         public EventScp914 Scp914 { get; set; } = new EventScp914();
+        public EventsCheckpoint Checkpoint { get; set; } = new EventsCheckpoint();
+        public EventsDoor Door { get; set; } = new EventsDoor();
 
+    }
+
+    public class EventsDoor
+    {
+        public Dictionary<string, Door> Doors { get; set; } = new Dictionary<string, Door>();
+    }
+
+    public class DoorPerm
+    {
+        public bool requireAll { get; set; }
+        public KeycardPermissions keycardPermission { get; set; }
+    }
+
+    public class Door
+    {
+        public DoorPerm doorPermission { get; set; }
+        public DoorDamageType ignoreDamageType { get; set; }
+    }
+
+    public class EventsCheckpoint
+    {
+        public Dictionary<string, Checkpoint> Checkpoints { get; set; } = new Dictionary<string, Checkpoint>();
+    }
+
+    public class Checkpoint
+    {
+        public DoorPerm doorPermission { get; set; }
+        public DoorDamageType ignoreDamageType { get; set; }
     }
 
     public class EventWorkstation

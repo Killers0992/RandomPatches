@@ -1,5 +1,6 @@
 ﻿using Exiled.API.Features;
 using HarmonyLib;
+using Interactables.Interobjects;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,17 +33,8 @@ namespace RandomPatches
             .IgnoreUnmatchedProperties()
             .Build();
 
-        public static Events Cfg;
-        public override void OnEnabled()
+        public void LoadConfig()
         {
-            if (!Config.IsEnabled)
-                return;
-            if (!Directory.Exists(Config.Folder))
-            {
-                Log.Warn($"Randompatches directory at {Config.Folder} is missing, creating.");
-                Directory.CreateDirectory(Config.Folder);
-            }
-
             if (!File.Exists(Config.FullPath))
             {
                 Log.Warn($"Randompatches file at {Config.FullPath} is missing, creating.");
@@ -54,6 +46,24 @@ namespace RandomPatches
                 Cfg = Deserializer.Deserialize<Events>(File.ReadAllText(Config.FullPath));
                 File.WriteAllText(Config.FullPath, Serializer.Serialize(Cfg));
             }
+        }
+
+        public void SaveConfig()
+        {
+            File.WriteAllText(Config.FullPath, Serializer.Serialize(Cfg));
+        }
+
+        public static Events Cfg;
+        public override void OnEnabled()
+        {
+            if (!Config.IsEnabled)
+                return;
+            if (!Directory.Exists(Config.Folder))
+            {
+                Log.Warn($"Randompatches directory at {Config.Folder} is missing, creating.");
+                Directory.CreateDirectory(Config.Folder);
+            }
+            LoadConfig();
             singleton = this;
             base.OnEnabled();
             eventHandlers = new EventHandlers();
@@ -108,20 +118,7 @@ namespace RandomPatches
             Exiled.Events.Handlers.Server.ReloadedConfigs += eventHandlers.OnReloadConfigs;
             harmony = new Harmony($"randompatches.{DateTime.Now.Ticks}");
             harmony.PatchAll();
-            Exiled.Events.Handlers.Server.WaitingForPlayers += Server_WaitingForPlayers;
-        }
-
-
-        private void Server_WaitingForPlayers()
-        {
-            foreach(var tesla in Map.TeslaGates)
-            {
-                tesla.sizeOfTrigger = Cfg.Tesla.triggerRange;
-            }
-            foreach(var gen in UnityEngine.Object.FindObjectsOfType<Generator079>())
-            {
-                gen.NetworkremainingPowerup = Cfg.Generator.remainingPowerup;
-            }
+            Exiled.Events.Handlers.Server.WaitingForPlayers += eventHandlers.OnWaitingForPlayers;
         }
 
     }
