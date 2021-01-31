@@ -262,7 +262,7 @@ namespace RandomPatches
                         doors.Add(name.GetName);
                         if (!config.Door.DoorsBreakable.ContainsKey(name.GetName))
                         {
-                            Log.Info($"Add missing door {name.GetName}.");
+                            Log.Info($"Add missing breakable door {name.GetName}.");
                             var doorPerm = bd.RequiredPermissions;
                             config.Door.DoorsBreakable.Add(name.GetName, new DoorBreakable()
                             {
