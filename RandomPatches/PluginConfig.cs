@@ -52,6 +52,7 @@ namespace RandomPatches
     public class EventsDoor
     {
         public Dictionary<string, Door> Doors { get; set; } = new Dictionary<string, Door>();
+        public Dictionary<string, DoorBreakable> DoorsBreakable { get; set; } = new Dictionary<string, DoorBreakable>();
     }
 
     public class DoorPerm
@@ -60,12 +61,18 @@ namespace RandomPatches
         public KeycardPermissions keycardPermission { get; set; }
     }
 
-    public class Door
+    public class DoorBreakable
     {
         public float health { get; set; }
         public DoorPerm doorPermission { get; set; }
         public DoorDamageType ignoreDamageType { get; set; }
     }
+
+    public class Door
+    {
+        public DoorPerm doorPermission { get; set; }
+    }
+
 
     public class EventsCheckpoint
     {

@@ -21,15 +21,17 @@ namespace RandomPatches
         public override Version Version { get; } = new Version(1,2,0);
 
         public Harmony harmony;
-        public EventHandlers eventHandlers;
+        private EventHandlers eventHandlers;
+        internal Events Cfg;
+        private bool alreadyLoaded = false;
         public static MainClass singleton;
 
-        public static readonly ISerializer Serializer = new SerializerBuilder()
+        private readonly ISerializer Serializer = new SerializerBuilder()
             .WithNamingConvention(UnderscoredNamingConvention.Instance)
             .IgnoreFields()
             .Build();
 
-        public static readonly IDeserializer Deserializer = new DeserializerBuilder()
+        private readonly IDeserializer Deserializer = new DeserializerBuilder()
             .WithNamingConvention(UnderscoredNamingConvention.Instance)
             .IgnoreFields()
             .IgnoreUnmatchedProperties()
@@ -55,20 +57,21 @@ namespace RandomPatches
             File.WriteAllText(Config.FullPath, Serializer.Serialize(Cfg));
         }
 
-        public static Events Cfg;
         public override void OnEnabled()
         {
             if (!Config.IsEnabled)
                 return;
+            if (alreadyLoaded)
+                return;
+            singleton = this;
+            alreadyLoaded = true;
             if (!Directory.Exists(Config.Folder))
             {
                 Log.Warn($"Randompatches directory at {Config.Folder} is missing, creating.");
                 Directory.CreateDirectory(Config.Folder);
             }
             LoadConfig();
-            singleton = this;
-            base.OnEnabled();
-            eventHandlers = new EventHandlers();
+            eventHandlers = new EventHandlers(this);
             Exiled.Events.Handlers.Player.ActivatingWorkstation += eventHandlers.OnActivateWorkstation;
             Exiled.Events.Handlers.Player.ActivatingWarheadPanel += eventHandlers.OnActivateWarheadPanel;
             Exiled.Events.Handlers.Player.ClosingGenerator += eventHandlers.OnClosingGenerator;
@@ -118,9 +121,10 @@ namespace RandomPatches
             Exiled.Events.Handlers.Warhead.Starting += eventHandlers.OnWarheadStart;
             Exiled.Events.Handlers.Warhead.Stopping += eventHandlers.OnWarheadStop;
             Exiled.Events.Handlers.Server.ReloadedConfigs += eventHandlers.OnReloadConfigs;
+            Exiled.Events.Handlers.Server.WaitingForPlayers += eventHandlers.OnWaitingForPlayers;
             harmony = new Harmony($"randompatches.{DateTime.Now.Ticks}");
             harmony.PatchAll();
-            Exiled.Events.Handlers.Server.WaitingForPlayers += eventHandlers.OnWaitingForPlayers;
+            base.OnEnabled();
         }
 
     }

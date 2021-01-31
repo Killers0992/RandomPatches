@@ -24,7 +24,7 @@ namespace RandomPatches.Patches
 			PryableDoor gate;
 			if ((damageableDoor = (door as IDamageableDoor)) != null)
 			{
-				if (!damageableDoor.IsDestroyed && door.GetExactState() < 1f && __instance._lastChargedDamageableDoor != damageableDoor && MainClass.Cfg.Scp.canScp096destroyDoor)
+				if (!damageableDoor.IsDestroyed && door.GetExactState() < 1f && __instance._lastChargedDamageableDoor != damageableDoor && MainClass.singleton.Cfg.Scp.canScp096destroyDoor)
 				{
 					damageableDoor.ServerDamage(250f, DoorDamageType.Scp096);
 					__instance._lastChargedDamageableDoor = damageableDoor;

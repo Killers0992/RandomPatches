@@ -13,9 +13,18 @@ namespace RandomPatches
 {
     public class EventHandlers
     {
+        private MainClass instance;
+        private Events config;
+
+        public EventHandlers(MainClass instance)
+        {
+            this.instance = instance;
+            this.config = this.instance.Cfg;
+        }
+
         internal void OnActivateWorkstation(ActivatingWorkstationEventArgs ev)
         {
-            if (!MainClass.Cfg.Workstation.canActivateWorkstationGlobal && !MainClass.Cfg.Workstation.canActivateWorkstation[ev.Player.Role])
+            if (!config.Workstation.canActivateWorkstationGlobal && !config.Workstation.canActivateWorkstation[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
@@ -25,77 +34,77 @@ namespace RandomPatches
 
         internal void OnClosingGenerator(ClosingGeneratorEventArgs ev)
         {
-            if (!MainClass.Cfg.Generator.canCloseGeneratorGlobal && !MainClass.Cfg.Generator.canCloseGenerator[ev.Player.Role])
+            if (!config.Generator.canCloseGeneratorGlobal && !config.Generator.canCloseGenerator[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnDeactivateWorkstation(DeactivatingWorkstationEventArgs ev)
         {
-            if (!MainClass.Cfg.Workstation.canDeactivateWorkstationGlobal && !MainClass.Cfg.Workstation.canDeactivateWorkstation[ev.Player.Role])
+            if (!config.Workstation.canDeactivateWorkstationGlobal && !config.Workstation.canDeactivateWorkstation[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnDropItem(DroppingItemEventArgs ev)
         {
-            if (!MainClass.Cfg.Item.canDropAnyItemGlobal && !MainClass.Cfg.Item.canDropAnyItem[ev.Player.Role])
+            if (!config.Item.canDropAnyItemGlobal && !config.Item.canDropAnyItem[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnOpenGenerator(OpeningGeneratorEventArgs ev)
         {
-            if (!MainClass.Cfg.Generator.canOpenGeneratorGlobal && !MainClass.Cfg.Generator.canOpenGenerator[ev.Player.Role])
+            if (!config.Generator.canOpenGeneratorGlobal && !config.Generator.canOpenGenerator[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnPickupItem(PickingUpItemEventArgs ev)
         {
-            if (!MainClass.Cfg.Item.canPickupAnyItemGlobal && !MainClass.Cfg.Item.canPickupAnyItem[ev.Player.Role])
+            if (!config.Item.canPickupAnyItemGlobal && !config.Item.canPickupAnyItem[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnAddTablet(InsertingGeneratorTabletEventArgs ev)
         {
-            if (!MainClass.Cfg.Generator.canInsertTabletGlobal && !MainClass.Cfg.Generator.canInsertTablet[ev.Player.Role])
+            if (!config.Generator.canInsertTabletGlobal && !config.Generator.canInsertTablet[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnFailEscapePD(FailingEscapePocketDimensionEventArgs ev)
         {
-            if (MainClass.Cfg.PocketDimension.alwaysExitPocketDimensionGlobal && MainClass.Cfg.PocketDimension.alwaysExitPocketDimension[ev.Player.Role])
+            if (config.PocketDimension.alwaysExitPocketDimensionGlobal && config.PocketDimension.alwaysExitPocketDimension[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnShotWeapon(ShootingEventArgs ev)
         {
-            if (!MainClass.Cfg.Weapon.canShotWeaponGlobal && !MainClass.Cfg.Weapon.canShotWeapon[ev.Shooter.Role])
+            if (!config.Weapon.canShotWeaponGlobal && !config.Weapon.canShotWeapon[ev.Shooter.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnActivateTesla(TriggeringTeslaEventArgs ev)
         {
-            if (!MainClass.Cfg.Tesla.canActivateTeslaGlobal && !MainClass.Cfg.Tesla.canActivateTesla[ev.Player.Role])
+            if (!config.Tesla.canActivateTeslaGlobal && !config.Tesla.canActivateTesla[ev.Player.Role])
                 ev.IsTriggerable = false;
         }
 
         internal void OnUseMedicalItem(UsingMedicalItemEventArgs ev)
         {
-            if (!MainClass.Cfg.MedicalItem.canUseMedicalItemGlobal && !MainClass.Cfg.MedicalItem.canUseMedicalItem[ev.Player.Role])
+            if (!config.MedicalItem.canUseMedicalItemGlobal && !config.MedicalItem.canUseMedicalItem[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnSpawnRagdoll(SpawningRagdollEventArgs ev)
         {
-            if (!MainClass.Cfg.Ragdoll.canCreateRagdollGlobal && !MainClass.Cfg.Ragdoll.canCreateRagdoll[ev.RoleType])
+            if (!config.Ragdoll.canCreateRagdollGlobal && !config.Ragdoll.canCreateRagdoll[ev.RoleType])
                 ev.IsAllowed = false;
         }
 
         internal void OnChangeDurability(ChangingDurabilityEventArgs ev)
         {
-            if (!MainClass.Cfg.Weapon.canChangeDurabilityGlobal)
+            if (!config.Weapon.canChangeDurabilityGlobal)
             {
-                if (MainClass.Cfg.Weapon.canChangeDurability.ContainsKey(ev.OldItem.id))
+                if (config.Weapon.canChangeDurability.ContainsKey(ev.OldItem.id))
                 {
-                    if (!MainClass.Cfg.Weapon.canChangeDurability[ev.OldItem.id])
+                    if (!config.Weapon.canChangeDurability[ev.OldItem.id])
                     {
                         ev.IsAllowed = false;
                         return;
@@ -107,86 +116,86 @@ namespace RandomPatches
 
         internal void OnDamageWindow(DamagingWindowEventArgs ev)
         {
-            ev.Damage = ev.Damage * MainClass.Cfg.Window.damageMultiplier;
-            if (!MainClass.Cfg.Window.canBeDamaged)
+            ev.Damage = ev.Damage * config.Window.damageMultiplier;
+            if (!config.Window.canBeDamaged)
                 ev.Damage = 0f;
         }
 
         internal void OnAnnounceTermination(AnnouncingScpTerminationEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.announceTerminationGlobal && !MainClass.Cfg.Scp.announceTermination[ev.Role.roleId])
+            if (!config.Scp.announceTerminationGlobal && !config.Scp.announceTermination[ev.Role.roleId])
                 ev.IsAllowed = false;
         }
 
         internal void OnRecallStart(StartingRecallEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp049StartRecalling)
+            if (!config.Scp.canScp049StartRecalling)
                 ev.IsAllowed = false;
         }
 
         internal void OnScp079InteractTesla(InteractingTeslaEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp079useTesla)
+            if (!config.Scp.canScp079useTesla)
                 ev.IsAllowed = false;
         }
 
         internal void OnScp079InteractSpeaker(StartingSpeakerEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp079useSpeaker)
+            if (!config.Scp.canScp079useSpeaker)
                 ev.IsAllowed = false;
         }
 
         internal void OnScp079GainLevel(GainingLevelEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp079gainLevel)
+            if (!config.Scp.canScp079gainLevel)
                 ev.IsAllowed = false;
         }
 
         internal void OnScp096Enrage(EnragingEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp096startEnrage)
+            if (!config.Scp.canScp096startEnrage)
                 ev.IsAllowed = false;
         }
 
         internal void OnScp106CreatePortal(CreatingPortalEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp106createPortal)
+            if (!config.Scp.canScp106createPortal)
                 ev.IsAllowed = false;
         }
 
         internal void OnScp173Blink(BlinkingEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp173blink)
+            if (!config.Scp.canScp173blink)
                 ev.Targets.Clear();
         }
 
         internal void OnScp914ChangeKnob(ChangingKnobSettingEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp914.canChangeKnobGlobal && !MainClass.Cfg.Scp914.canChangeKnob[ev.Player.Role])
+            if (!config.Scp914.canChangeKnobGlobal && !config.Scp914.canChangeKnob[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnWarheadChangeLeverStatus(ChangingLeverStatusEventArgs ev)
         {
-            if (!MainClass.Cfg.Warhead.canChangeLeverStatusGlobal && !MainClass.Cfg.Warhead.canChangeLeverStatus[ev.Player.Role])
+            if (!config.Warhead.canChangeLeverStatusGlobal && !config.Warhead.canChangeLeverStatus[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnWarheadStop(StoppingEventArgs ev)
         {
-            if (!MainClass.Cfg.Warhead.canBeDisabledGlobal && !MainClass.Cfg.Warhead.canBeDisabled[ev.Player.Role])
+            if (!config.Warhead.canBeDisabledGlobal && !config.Warhead.canBeDisabled[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnWarheadStart(StartingEventArgs ev)
         {
-            if (!MainClass.Cfg.Warhead.canBeEnabledGlobal && !MainClass.Cfg.Warhead.canBeEnabled[ev.Player.Role])
+            if (!config.Warhead.canBeEnabledGlobal && !config.Warhead.canBeEnabled[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnReloadConfigs()
         {
-            MainClass.Cfg = MainClass.Deserializer.Deserialize<Events>(File.ReadAllText(MainClass.singleton.Config.FullPath));
+            instance.LoadConfig();
             OnWaitingForPlayers();
         }
 
@@ -194,11 +203,11 @@ namespace RandomPatches
         {
             foreach (var tesla in Map.TeslaGates)
             {
-                tesla.sizeOfTrigger = MainClass.Cfg.Tesla.triggerRange;
+                tesla.sizeOfTrigger = config.Tesla.triggerRange;
             }
             foreach (var gen in UnityEngine.Object.FindObjectsOfType<Generator079>())
             {
-                gen.NetworkremainingPowerup = MainClass.Cfg.Generator.remainingPowerup;
+                gen.NetworkremainingPowerup = config.Generator.remainingPowerup;
             }
             List<string> doors = new List<string>();
             List<string> checkpoints = new List<string>();
@@ -209,11 +218,11 @@ namespace RandomPatches
                 {
                     if (!name.GetName.Contains("CHECKPOINT"))
                         continue;
-                    if (!MainClass.Cfg.Checkpoint.Checkpoints.ContainsKey(name.GetName))
+                    if (!config.Checkpoint.Checkpoints.ContainsKey(name.GetName))
                     {
                         Log.Info($"Add missing checkpoint {name.GetName}.");
                         var doorPerm = cp.RequiredPermissions;
-                        MainClass.Cfg.Checkpoint.Checkpoints.Add(name.GetName, new Checkpoint()
+                        config.Checkpoint.Checkpoints.Add(name.GetName, new Checkpoint()
                         {
                             ignoreDamageType = (cp._subDoors[0] as BreakableDoor)._ignoredDamageSources,
                             health = (cp._subDoors[0] as BreakableDoor)._maxHealth,
@@ -224,7 +233,7 @@ namespace RandomPatches
                             }
                         });
                     }
-                    var checkpoint = MainClass.Cfg.Checkpoint.Checkpoints[name.GetName];
+                    var checkpoint = config.Checkpoint.Checkpoints[name.GetName];
                     checkpoints.Add(name.GetName);
                     cp.RequiredPermissions = new DoorPermissions()
                     {
@@ -242,7 +251,7 @@ namespace RandomPatches
                     }
                 }
             }
-            foreach(var d in UnityEngine.Object.FindObjectsOfType<DoorVariant>())
+            foreach (var d in UnityEngine.Object.FindObjectsOfType<DoorVariant>())
             {
                 if (d.TryGetComponent<DoorNametagExtension>(out DoorNametagExtension name))
                 {
@@ -251,11 +260,11 @@ namespace RandomPatches
                     if (d is BreakableDoor bd)
                     {
                         doors.Add(name.GetName);
-                        if (!MainClass.Cfg.Door.Doors.ContainsKey(name.GetName))
+                        if (!config.Door.DoorsBreakable.ContainsKey(name.GetName))
                         {
                             Log.Info($"Add missing door {name.GetName}.");
                             var doorPerm = bd.RequiredPermissions;
-                            MainClass.Cfg.Door.Doors.Add(name.GetName, new Door()
+                            config.Door.DoorsBreakable.Add(name.GetName, new DoorBreakable()
                             {
                                 ignoreDamageType = bd._ignoredDamageSources,
                                 health = bd._maxHealth,
@@ -266,10 +275,38 @@ namespace RandomPatches
                                 }
                             });
                         }
-                        var door = MainClass.Cfg.Door.Doors[name.GetName];
+                        var door = config.Door.DoorsBreakable[name.GetName];
                         bd._maxHealth = door.health;
                         bd._remainingHealth = door.health;
                         bd._ignoredDamageSources = door.ignoreDamageType;
+                        bd.RequiredPermissions = new DoorPermissions()
+                        {
+                            RequireAll = door.doorPermission.requireAll,
+                            RequiredPermissions = door.doorPermission.keycardPermission
+                        };
+                    }
+                    else
+                    {
+                        doors.Add(name.GetName);
+                        if (!config.Door.Doors.ContainsKey(name.GetName))
+                        {
+                            Log.Info($"Add missing door {name.GetName}.");
+                            var doorPerm = d.RequiredPermissions;
+                            config.Door.Doors.Add(name.GetName, new Door()
+                            {
+                                doorPermission = new DoorPerm()
+                                {
+                                    requireAll = doorPerm.RequireAll,
+                                    keycardPermission = doorPerm.RequiredPermissions
+                                }
+                            });
+                        }
+                        var door = config.Door.Doors[name.GetName];
+                        d.RequiredPermissions = new DoorPermissions()
+                        {
+                            RequireAll = door.doorPermission.requireAll,
+                            RequiredPermissions = door.doorPermission.keycardPermission
+                        };
                     }
                 }
                 else
@@ -278,11 +315,11 @@ namespace RandomPatches
                     {
                         var nm = $"{(d.name.StartsWith("EZ") ? "ENTRANCE_ZONE" : d.name.StartsWith("HCZ") ? "HEAVY_ZONE" : "LIGHT_ZONE")}";
                         doors.Add(nm);
-                        if (!MainClass.Cfg.Door.Doors.ContainsKey(nm))
+                        if (!config.Door.DoorsBreakable.ContainsKey(nm))
                         {
-                            Log.Info($"Add missing door {nm}.");
+                            Log.Info($"Add missing breakable door {nm}.");
                             var doorPerm = bd.RequiredPermissions;
-                            MainClass.Cfg.Door.Doors.Add(nm, new Door()
+                            config.Door.DoorsBreakable.Add(nm, new DoorBreakable()
                             {
                                 ignoreDamageType = bd._ignoredDamageSources,
                                 health = bd._maxHealth,
@@ -293,7 +330,7 @@ namespace RandomPatches
                                 }
                             });
                         }
-                        var bdoor = MainClass.Cfg.Door.Doors[nm];
+                        var bdoor = config.Door.DoorsBreakable[nm];
                         bd._ignoredDamageSources = bdoor.ignoreDamageType;
                         bd.RequiredPermissions = new DoorPermissions()
                         {
@@ -305,77 +342,85 @@ namespace RandomPatches
                     }
                 }
             }
-            foreach(var door in MainClass.Cfg.Door.Doors.Keys.ToArray())
+            foreach (var door in config.Door.Doors.Keys.ToArray())
             {
                 if (!doors.Contains(door))
                 {
-                    MainClass.Cfg.Door.Doors.Remove(door);
+                    config.Door.Doors.Remove(door);
                     Log.Info($"Removed door {door}, reason: not found.");
                 }
             }
-            foreach (var checkpoint in MainClass.Cfg.Checkpoint.Checkpoints.Keys.ToArray())
+            foreach (var door in config.Door.DoorsBreakable.Keys.ToArray())
+            {
+                if (!doors.Contains(door))
+                {
+                    config.Door.DoorsBreakable.Remove(door);
+                    Log.Info($"Removed breakable door {door}, reason: not found.");
+                }
+            }
+            foreach (var checkpoint in config.Checkpoint.Checkpoints.Keys.ToArray())
             {
                 if (!checkpoints.Contains(checkpoint))
                 {
-                    MainClass.Cfg.Checkpoint.Checkpoints.Remove(checkpoint);
+                    config.Checkpoint.Checkpoints.Remove(checkpoint);
                     Log.Info($"Removed checkpoint {checkpoint}, reason: not found.");
                 }
             }
-            MainClass.singleton.SaveConfig();
+            instance.SaveConfig();
         }
 
         internal void OnScp914Activate(ActivatingEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp914.canBeActivatedGlobal && !MainClass.Cfg.Scp914.canBeActivated[ev.Player.Role])
+            if (!config.Scp914.canBeActivatedGlobal && !config.Scp914.canBeActivated[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnScp106UsePortal(TeleportingEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp106usePortal)
+            if (!config.Scp.canScp106usePortal)
                 ev.IsAllowed = false;
         }
 
         internal void OnScp106Contain(ContainingEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp106getContained)
+            if (!config.Scp.canScp106getContained)
                 ev.IsAllowed = false;
         }
 
         internal void OnScp096PryGate(StartPryingGateEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp096pryGate)
+            if (!config.Scp.canScp096pryGate)
                 ev.IsAllowed = false;
         }
 
         internal void OnScp096Calmdown(CalmingDownEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp096calmDown)
+            if (!config.Scp.canScp096calmDown)
                 ev.IsAllowed = false;
         }
 
         internal void OnScp079GainExperience(GainingExperienceEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp079gainExperience)
+            if (!config.Scp.canScp079gainExperience)
                 ev.IsAllowed = false;
-            ev.Amount = ev.Amount * MainClass.Cfg.Scp.scp079experienceMultiplier;
+            ev.Amount = ev.Amount * config.Scp.scp079experienceMultiplier;
         }
 
         internal void OnScp079InteractDoor(InteractingDoorEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp079useDoor)
+            if (!config.Scp.canScp079useDoor)
                 ev.IsAllowed = false;
         }
 
         internal void OnScp079ElevatorTeleport(ElevatorTeleportEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp079useElevatorTeleport)
+            if (!config.Scp.canScp079useElevatorTeleport)
                 ev.IsAllowed = false;
         }
 
         internal void OnScp079ChangeCamera(ChangingCameraEventArgs ev)
         {
-            if (!MainClass.Cfg.Scp.canScp079ChangeCamera)
+            if (!config.Scp.canScp079ChangeCamera)
                 ev.IsAllowed = false;
         }
 
@@ -383,9 +428,9 @@ namespace RandomPatches
         {
             if (ev.IsFrag)
             {
-                if (!MainClass.Cfg.Grenade.canGrenadeExplode)
+                if (!config.Grenade.canGrenadeExplode)
                     ev.IsAllowed = false;
-                if (!MainClass.Cfg.Grenade.canGrenadeDealDamageGlobal)
+                if (!config.Grenade.canGrenadeDealDamageGlobal)
                 {
                     ev.TargetToDamages.Clear();
                 }
@@ -393,37 +438,37 @@ namespace RandomPatches
                 {
                     foreach (var target in ev.TargetToDamages)
                     {
-                        if (!MainClass.Cfg.Grenade.canGrenadeDealDamage[target.Key.Role])
+                        if (!config.Grenade.canGrenadeDealDamage[target.Key.Role])
                             ev.TargetToDamages[target.Key] = 0f;
                     }
                 }
             }
             else
-                if (!MainClass.Cfg.Grenade.canFlashGrenadeExplode)
+                if (!config.Grenade.canFlashGrenadeExplode)
                 ev.IsAllowed = false;
         }
 
         internal void OnDecontaminate(DecontaminatingEventArgs ev)
         {
-            if (!MainClass.Cfg.Decontamination.canStartDecontaminationProcedure)
+            if (!config.Decontamination.canStartDecontaminationProcedure)
                 ev.IsAllowed = false;
         }
 
         internal void OnAnnounceDecontamination(AnnouncingDecontaminationEventArgs ev)
         {
-            if (!MainClass.Cfg.Decontamination.canAnnounce)
+            if (!config.Decontamination.canAnnounce)
                 ev.Id = -1;
         }
 
         internal void OnChangeAttachments(ChangingAttachmentsEventArgs ev)
         {
-            if (!MainClass.Cfg.Weapon.canChangeAttachments)
+            if (!config.Weapon.canChangeAttachments)
                 ev.IsAllowed = false;
         }
 
         internal void OnInteractElevator(InteractingElevatorEventArgs ev)
         {
-            if (!MainClass.Cfg.Elevator.canCallElevatorGlobal && !MainClass.Cfg.Elevator.canCallElevator[ev.Player.Role])
+            if (!config.Elevator.canCallElevatorGlobal && !config.Elevator.canCallElevator[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
@@ -432,11 +477,11 @@ namespace RandomPatches
             switch (ev.Type)
             {
                 case Exiled.API.Enums.GrenadeType.FragGrenade:
-                    if (!MainClass.Cfg.Grenade.canThrowGrenadeGlobal && !MainClass.Cfg.Grenade.canThrowGrenade[ev.Player.Role])
+                    if (!config.Grenade.canThrowGrenadeGlobal && !config.Grenade.canThrowGrenade[ev.Player.Role])
                         ev.IsAllowed = false;
                     break;
                 case Exiled.API.Enums.GrenadeType.Flashbang:
-                    if (!MainClass.Cfg.Grenade.canThrowFlashGrenadeGlobal && !MainClass.Cfg.Grenade.canThrowFlashGrenade[ev.Player.Role])
+                    if (!config.Grenade.canThrowFlashGrenadeGlobal && !config.Grenade.canThrowFlashGrenade[ev.Player.Role])
                         ev.IsAllowed = false;
                     break;
             }
@@ -444,37 +489,37 @@ namespace RandomPatches
 
         internal void OnCancelMedicalItem(StoppingMedicalItemEventArgs ev)
         {
-            if (!MainClass.Cfg.MedicalItem.canCancelUsingMedicalItemGlobal && !MainClass.Cfg.MedicalItem.canUseMedicalItem[ev.Player.Role])
+            if (!config.MedicalItem.canCancelUsingMedicalItemGlobal && !config.MedicalItem.canUseMedicalItem[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnUnlockGenerator(UnlockingGeneratorEventArgs ev)
         {
-            if (!MainClass.Cfg.Generator.canUnlockGeneratorGlobal && !MainClass.Cfg.Generator.canUnlockGenerator[ev.Player.Role])
+            if (!config.Generator.canUnlockGeneratorGlobal && !config.Generator.canUnlockGenerator[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnReloadWeapon(ReloadingWeaponEventArgs ev)
         {
-            if (!MainClass.Cfg.Weapon.canReloadWeaponGlobal && !MainClass.Cfg.Weapon.canReloadWeapon[ev.Player.Role])
+            if (!config.Weapon.canReloadWeaponGlobal && !config.Weapon.canReloadWeapon[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnExitPD(EscapingPocketDimensionEventArgs ev)
         {
-            if (!MainClass.Cfg.PocketDimension.canExitPocketDimensionGlobal && !MainClass.Cfg.PocketDimension.canExitPocketDimension[ev.Player.Role])
+            if (!config.PocketDimension.canExitPocketDimensionGlobal && !config.PocketDimension.canExitPocketDimension[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnEnterPD(EnteringPocketDimensionEventArgs ev)
         {
-            if (!MainClass.Cfg.PocketDimension.canEnterPocketDimensionGlobal && !MainClass.Cfg.PocketDimension.canEnterPocketDimension[ev.Player.Role])
+            if (!config.PocketDimension.canEnterPocketDimensionGlobal && !config.PocketDimension.canEnterPocketDimension[ev.Player.Role])
                 ev.IsAllowed = false;
         }
 
         internal void OnRemoveTablet(EjectingGeneratorTabletEventArgs ev)
         {
-            if (!MainClass.Cfg.Generator.canRemoveTabletGlobal && !MainClass.Cfg.Generator.canRemoveTablet[ev.Player.Role])
+            if (!config.Generator.canRemoveTabletGlobal && !config.Generator.canRemoveTablet[ev.Player.Role])
                 ev.IsAllowed = false;
         }
     }
