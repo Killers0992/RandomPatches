@@ -17,8 +17,8 @@ namespace RandomPatches
         public override string Author { get; } = "Killers0992";
         public override string Name { get; } = "RandomPatches";
         public override string Prefix { get; } = "randompatches";
-        public override Version RequiredExiledVersion { get; } = new Version("2.1.29");
-        public override Version Version { get; } = new Version("1.2.0");
+        public override Version RequiredExiledVersion { get; } = new Version(2,1,29);
+        public override Version Version { get; } = new Version(1,2,0);
 
         public Harmony harmony;
         public EventHandlers eventHandlers;

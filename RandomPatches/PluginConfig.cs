@@ -609,7 +609,7 @@ namespace RandomPatches
     public class EventWindow
     {
         public bool canBeDamaged { get; set; } = true;
-        public float damageMultiplier { get; set; } = 0f;
+        public float damageMultiplier { get; set; } = 1f;
     }
 
     public class EventScp
@@ -633,7 +633,7 @@ namespace RandomPatches
         public bool canScp079useSpeaker { get; set; } = true;
         public bool canScp079gainLevel { get; set; } = true;
         public bool canScp079gainExperience { get; set; } = true;
-        public float scp079experienceMultiplier { get; set; } = 0f;
+        public float scp079experienceMultiplier { get; set; } = 1f;
         public bool canScp096calmDown { get; set; } = true;
         public bool canScp096startEnrage { get; set; } = true;
         public bool canScp096pryGate { get; set; } = true;
