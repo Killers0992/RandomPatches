@@ -2,11 +2,6 @@
 using Interactables.Interobjects;
 using Interactables.Interobjects.DoorUtils;
 using PlayableScps;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace RandomPatches.Patches
