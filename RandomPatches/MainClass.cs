@@ -12,7 +12,7 @@ namespace RandomPatches
         public override string Author { get; } = "Killers0992";
         public override string Name { get; } = "RandomPatches";
         public override string Prefix { get; } = "randompatches";
-        public override Version RequiredExiledVersion { get; } = new Version(2,1,29);
+        public override Version RequiredExiledVersion { get; } = new Version(2,10,0);
         public override Version Version { get; } = new Version(1,2,0);
 
         public Harmony harmony;
@@ -97,9 +97,9 @@ namespace RandomPatches
             Exiled.Events.Handlers.Map.ExplodingGrenade += eventHandlers.OnExplodeGrenade;
             Exiled.Events.Handlers.Scp049.StartingRecall += eventHandlers.OnRecallStart;
             Exiled.Events.Handlers.Scp079.ChangingCamera += eventHandlers.OnScp079ChangeCamera;
-            Exiled.Events.Handlers.Scp079.ElevatorTeleport += eventHandlers.OnScp079ElevatorTeleport;
+            Exiled.Events.Handlers.Scp079.ElevatorTeleporting += eventHandlers.OnScp079ElevatorTeleport;
             Exiled.Events.Handlers.Scp079.InteractingTesla += eventHandlers.OnScp079InteractTesla;
-            Exiled.Events.Handlers.Scp079.InteractingDoor += eventHandlers.OnScp079InteractDoor;
+            Exiled.Events.Handlers.Scp079.TriggeringDoor += eventHandlers.OnScp079InteractDoor;
             Exiled.Events.Handlers.Scp079.StartingSpeaker += eventHandlers.OnScp079InteractSpeaker;
             Exiled.Events.Handlers.Scp079.GainingExperience += eventHandlers.OnScp079GainExperience;
             Exiled.Events.Handlers.Scp079.GainingLevel += eventHandlers.OnScp079GainLevel;

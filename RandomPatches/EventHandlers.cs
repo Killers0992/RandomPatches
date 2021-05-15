@@ -408,7 +408,7 @@ namespace RandomPatches
                 ev.IsAllowed = false;
         }
 
-        internal void OnScp079ElevatorTeleport(ElevatorTeleportEventArgs ev)
+        internal void OnScp079ElevatorTeleport(ElevatorTeleportingEventArgs ev)
         {
             if (!config.Scp.canScp079useElevatorTeleport)
                 ev.IsAllowed = false;
